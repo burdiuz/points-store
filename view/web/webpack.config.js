@@ -96,12 +96,16 @@ module.exports = {
     port: 8000,
     open: true,
     hot: true,
+    historyApiFallback: {
+      index: 'index.html'
+    },
   },
 
   resolve: {
     // This will only alias the exact import "react-native"
     alias: {
       'react-native$': 'react-native-web',
+      'react-router-native': 'react-router-dom',
     },
     // If you're working on a multi-platform React Native app, web-specific
     // module implementations should be written in files using the extension

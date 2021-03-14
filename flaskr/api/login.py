@@ -8,6 +8,10 @@ from flask import (
 
 from flaskr.db import get_db
 
+#            salt = uuid.uuid4().hex
+#            hashed_password = hashlib.sha512(
+#                (password + salt).encode('utf8')).hexdigest()
+
 
 def init(bp):
     @bp.route('/login', methods=['POST'])
@@ -15,9 +19,9 @@ def init(bp):
         error = None
         username = None
         password = None
-        if request.is_json():
-            username = request.json.username
-            password = request.json.password
+        if request.is_json:
+            username = request.json.get('username')
+            password = request.json.get('password')
 
         db = get_db()
 
@@ -27,21 +31,27 @@ def init(bp):
             error = 'Password is required.'
 
         if error is None:
-            salt = uuid.uuid4().hex
-            hashed_password = hashlib.sha512(
-                (password + salt).encode('utf8')).hexdigest()
-
             record = db.execute(
-                'SELECT id, username, role FROM user WHERE username = ? AND password = ? AMD active = 1', (username, hashed_password)).fetchone()
-            if record is not None:
-                set_session_user(record['id'], record['role'])
-                return record
-            else:
-                error = 'User {} not found.'.format(username)
+                'SELECT id, username, password, salt, role FROM users WHERE username = ? AND active = 1', (username, )).fetchone()
 
-        return {
-            "error": error
-        }
+            if record is None:
+                return {
+                    "error": 'User {} not found.'.format(username)
+                }
+            hashed_password = hashlib.sha512(
+                (password + record['salt']).encode('utf8')).hexdigest()
+
+            if hashed_password != record['password']:
+                return {
+                    "error": 'User {} not found.'.format(username)
+                }
+
+            set_session_user(record['id'], record['role'])
+            return {
+                "id": record['id'],
+                'username': record['username'],
+                'role': record['role']
+            }
 
     @bp.route('/logout', methods=['POST'])
     def api_logout():

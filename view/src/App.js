@@ -3,53 +3,66 @@
  * https://github.com/facebook/react-native
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+import {
+  ApplicationProvider,
+  Layout,
+  Card,
+  Text,
+  Input,
+  Button,
+  Divider,
+  IconRegistry,
+} from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { default as theme } from './theme.json';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Provider } from 'react-redux';
+
+import { LoginScreen } from './features/login';
+import { MainLayout } from './Layout';
+import { Routes } from './Routes';
+import { store } from './store';
 
 const HomeScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text category="h1">HOME</Text>
-  </Layout>
+  <Layout
+    style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}></Layout>
 );
 
 const App = () => {
   return (
-    <ApplicationProvider {...eva} theme={{...eva.dark, ...theme}}>
-      <HomeScreen />
-    </ApplicationProvider>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <Provider store={store}>
+          <Routes />
+        </Provider>
+      </ApplicationProvider>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  engine: {
-    position: 'absolute',
-    right: 0,
+  topContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  card: {
+    minWidth: 480,
+    width: '25%',
+    margin: 2,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  footerControl: {
+    marginHorizontal: 2,
   },
 });
 

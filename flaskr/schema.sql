@@ -15,6 +15,10 @@ CREATE TABLE tasks (
   amount INTEGER NOT NULL DEFAULT 0,
   title TEXT NOT NULL,
   description TEXT,
+
+  /* TYPE - "debet", "credit", "fine" */
+  type TEXT NOT NULL,
+  duration INTEGER NOT NULL DEFAULT 0,
   active INTEGER NOT NULL DEFAULT 1
 );
 
@@ -33,9 +37,6 @@ CREATE TABLE history (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   sender_id INTEGER NOT NULL,
   receiver_id INTEGER NOT NULL,
-
-  /* TYPE - "debet", "credit" */
-  type TEXT NOT NULL,
   amount INTEGER NOT NULL,
   task_id INTEGER,
   comment TEXT,
@@ -56,4 +57,6 @@ INSERT INTO users (
   "e77f0b9cfe436d3217ab9868f466a004f6322f78d61fa53f33ece3191b726cdbdaa249eb2c3f03d7fe3ef1428185150dab06158e0d344ca968649d36e3856384",
   "69cb36f790524d588c3362785c1b10de",
   "admin"
-)
+);
+
+INSERT INTO points (user_id, amount) VALUES (1, 0);
