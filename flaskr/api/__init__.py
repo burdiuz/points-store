@@ -20,3 +20,9 @@ users.init(bp)
 
 from . import history
 history.init(bp)
+
+from . import points
+points.init(bp)
+
+from . import tasks
+tasks.init(bp)

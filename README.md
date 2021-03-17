@@ -1,5 +1,4 @@
-This branch contains integration of react-native-web and react-native-elements using react-scripts.
-Check out this article for more details
-[https://medium.com/@aureliomerenda/create-a-native-web-app-with-react-native-web-419acac86b82](https://medium.com/@aureliomerenda/create-a-native-web-app-with-react-native-web-419acac86b82)
-All the implementation details are in view folder.
+This branch contains integration of react-native-web and @ui-kitten/components using custom webpack configuration described here
+[https://necolas.github.io/react-native-web/docs/multi-platform/](https://necolas.github.io/react-native-web/docs/multi-platform/)
+All the implementation details in view folder.
 
