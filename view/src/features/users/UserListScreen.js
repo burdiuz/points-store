@@ -97,7 +97,7 @@ export const UserListScreen = ({ match }) => {
                   onEdit={onEdit}
                   onView={onView}
                 />
-              </ListItem.Title>
+              </ListItem>
             );
           })
         ) : (

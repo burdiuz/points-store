@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Layout, Text, Button } from '@ui-kitten/components';
+import { View } from 'react-native';
+import { Text, Button } from 'react-native-elements';
 
 import {
   loadUserPoints,
@@ -20,13 +21,12 @@ export const ProfileScreen = () => {
   }, []);
 
   return (
-    <Layout style={{ flex: 1, flexDirection: 'column', margin: 20 }}>
-      <Layout style={{ flexDirection: 'row' }}>
+    <View style={{ flex: 1, flexDirection: 'column', margin: 20 }}>
+      <View style={{ flexDirection: 'row' }}>
         <Text category="h1">{name}</Text>
         <Text appearance="hint">{role}</Text>
-      </Layout>
-      <Layout
-        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      </View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text
           appearance="hint"
           category="h1"
@@ -35,13 +35,13 @@ export const ProfileScreen = () => {
           }}>
           {points}
         </Text>
-      </Layout>
+      </View>
       <Button
         appearance="outline"
         size="giant"
         onPress={() => dispatch(loadUserPoints())}>
         REFRESH
       </Button>
-    </Layout>
+    </View>
   );
 };

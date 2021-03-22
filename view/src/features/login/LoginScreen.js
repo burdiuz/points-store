@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Layout } from '@ui-kitten/components';
+import { View, StyleSheet } from 'react-native';
 import { LoginForm } from './LoginForm';
 
 export const LoginScreen = () => (
-  <Layout style={styles.layout}>
+  <View style={styles.layout}>
     <LoginForm />
-  </Layout>
+  </View>
 );
 
 const styles = StyleSheet.create({

@@ -5,22 +5,17 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "web": "react-scripts start",
-    "build": "react-scripts build",
+    "web": "./node_modules/.bin/webpack serve --mode development -d eval-source-map -c ./web/webpack.config.js --inline",
+    "build": "./node_modules/.bin/webpack --mode production --config ./web/webpack.config.js",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "flow": "flow",
-    "web:start": "node scripts/start.js",
-    "web:build": "node scripts/build.js",
-    "web:test": "node scripts/test.js"
+    "flow": "flow"
   },
   "dependencies": {
-    "@babel/plugin-transform-flow-strip-types": "^7.13.0",
     "@react-native-picker/picker": "^1.9.12",
     "@reduxjs/toolkit": "^1.5.0",
-    "babel-plugin-react-native-web": "^0.15.0",
-    "flow-bin": "^0.146.0",
+    "formik": "^2.2.6",
     "react": "16.13.1",
     "react-dom": "^17.0.1",
     "react-native": "0.63.4",
@@ -39,9 +34,17 @@
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-react-native-web": "^0.15.0",
+    "copy-webpack-plugin": "^8.0.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-scripts": "^4.0.3",
-    "react-test-renderer": "16.13.1"
+    "react-test-renderer": "16.13.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2",
+    "write-file-webpack-plugin": "^4.5.1"
   },
   "jest": {
     "preset": "react-native"
