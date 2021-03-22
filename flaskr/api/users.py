@@ -7,11 +7,11 @@ from flaskr.db import get_db
 
 
 def hash_password(password, salt):
-    return hashlib.sha512(str(password).encode('utf-8') + salt).hexdigest()
+    return hashlib.sha512(str(password, 'utf-8') + salt).hexdigest()
 
 
 def generate_salt():
-    return str(uuid.uuid4().hex).encode('utf-8')
+    return str(uuid.uuid4().hex, 'utf-8')
 
 
 def api_users_read():
@@ -67,7 +67,7 @@ def api_users_patch():
         role=:role, active=:active
       WHERE
         id=:id
-      )""", data)
+      """, data)
 
     cursor.connection.commit()
 

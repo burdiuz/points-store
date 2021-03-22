@@ -7,7 +7,7 @@ import {
   Button,
   Select,
   SelectItem,
-  CheckBox,
+  Toggle,
   Text,
   IndexPath,
 } from '@ui-kitten/components';
@@ -68,23 +68,21 @@ export const UserAddScreen = () => {
           selectedIndex={rolePath}
           value={ROLE_TITLES[rolePath.row]}
           onSelect={(indexPath) => {
-            formik.handleChange('role')(`${indexPath.row}`);
+            formik.setFieldValue('role', `${indexPath.row}`);
             setRolePath(indexPath);
-          }}
-          onBlur={formik.handleBlur('role')}>
-          <SelectItem title="Receiver" />
-          <SelectItem title="Sender" />
-          <SelectItem title="Admin" />
+          }}>
+          {ROLE_TITLES.map((title) => (
+            <SelectItem key={title} title={title} />
+          ))}
         </Select>
         <Layout style={{ flexDirection: 'row' }}>
-          <CheckBox
+          <Toggle
             checked={true}
             style={{ marginRight: 10 }}
             checked={!!formik.values.active}
             onChange={(value) => {
-              formik.handleChange('active')(value ? '1' : '');
+              formik.setFieldValue('active', value ? '1' : '');
             }}
-            onBlur={formik.handleBlur('active')}
           />
           <Text appearance="hint">Active</Text>
         </Layout>

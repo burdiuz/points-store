@@ -15,7 +15,25 @@ def api_history_read():
 
 
 def api_history_append():
-    return ''
+    if request.is_json is False:
+        return {}
+
+    cursor = get_db().cursor()
+    data = dict(request.json)
+    data['sender_id'] = get_logged_user_id()
+
+    cursor.execute("""INSERT INTO history (
+        sender_id, receiver_id, amount, task_id, comment
+      ) VALUES (
+        :sender_id, :receiver_id, :amount, :task_id, :comment
+      )""", data)
+
+    cursor.connection.commit()
+
+    return {
+        # TODO return created row?
+        "payload": cursor.lastrowid
+    }
 
 
 def init(bp):
